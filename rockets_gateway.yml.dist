@@ -1,0 +1,5 @@
+# Copy to rockets_gateway.yml to override the defaults (HTTP :8088, gRPC :8000).
+# rockets_gateway.yml is gitignored.
+grpc_server: ":8000"
+http: ":8088"
+audit_log: false

@@ -24,6 +24,10 @@ By AI:
 * Dockerfile to run project in.
 * The store file (internal/domain/rockets/store.go).
 
+Additionally, I asked GitHub Copilot for a review of the whole project through the issue https://github.com/diegoseso/rockets-code-test-parser-lunar/issues and it detected that I missed the config
+distribution file. 
+
+
 ## What I verified myself 
 
 * Ran and debugged the project locally many times against the provided test binary to check ordering cases, out-of-order, duplicates, gaps, explosion as terminal state.
