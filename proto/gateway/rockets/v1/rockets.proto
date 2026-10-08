@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package gateway.rockets.v1;
+
+option go_package = "github.com/diegoseso/rockets-code-test-parser-lunar/proto/gen/proto/go/gateway/rockets/v1";
+
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+service RocketsAPIService {
+  // Get returns the current state of a specific rocket
+  rpc Get(GetRequest) returns (GetResponse) {
+    option (google.api.http) = {
+      get: "/v1/rockets/{id}"
+    };
+  }
+
+  // List returns all rockets with optional filtering and sorting
+  rpc List(ListRequest) returns (ListResponse) {
+    option (google.api.http) = {
+      post: "/v1/rockets/list"
+      body: "*"
+    };
+  }
+}
+
+message GetRequest {
+  string id = 1;
+}
+
+message ListRequest {
+  // Sorting options
+  string order = 1;
+  string order_by = 2;
+
+  // Filter options
+  string filter_id = 10;
+  int32 filter_min_speed = 11;
+  int32 filter_max_speed = 12;
+}
+
+message GetResponse {
+  Rocket rocket = 1;
+}
+
+message ListResponse {
+  repeated Rocket rockets = 1;
+  int32 total = 2;
+}
+
+// Rocket represents the current state of a rocket
+message Rocket {
+  string id = 1;
+  string type = 2;
+  string mission = 3;
+  int32 speed = 4;
+  string status = 5;                              // Status: "launched" or "exploded", Here I doubted to do ENUM
+  optional string exploded_reason = 6;
+  google.protobuf.Timestamp launched_at = 7;
+  google.protobuf.Timestamp last_updated_at = 8;
+}

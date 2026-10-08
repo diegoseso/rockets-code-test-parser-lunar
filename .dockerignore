@@ -1,0 +1,8 @@
+.git
+.idea
+cmd
+capture.pcap
+rockets-server
+rockets_gateway.yml
+proto/gen
+vendor

@@ -1,0 +1,22 @@
+# Local config
+rockets_gateway.yml
+
+# Generated protobuf code (run `make proto` or `buf generate`)
+/proto/gen/
+
+# IDE
+.idea/
+
+# Challenge binaries and reverse-engineering artifacts (provided by Lunar's ZIP, never committed)
+*.exe
+/rockets
+/rockets.exe
+*.rep
+*.gpr
+/cmd/
+
+# Built server binary
+/rockets-server
+
+# Vendored dependencies
+vendor/

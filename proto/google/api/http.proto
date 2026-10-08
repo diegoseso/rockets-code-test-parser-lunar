@@ -1,0 +1,50 @@
+// Minimal http.proto to satisfy imports for annotations.proto
+// Licensed under the Apache License, Version 2.0.
+
+syntax = "proto3";
+
+package google.api;
+
+import "google/protobuf/descriptor.proto";
+
+option java_multiple_files = true;
+option java_outer_classname = "HttpProto";
+option java_package = "com.google.api";
+option objc_class_prefix = "GAPI";
+option go_package = "google.golang.org/genproto/googleapis/api/annotations;annotations";
+
+// A collection of HTTP configuration rules that apply to a gRPC service.
+message Http {
+  repeated HttpRule rules = 1;
+  bool fully_decode_reserved_expansion = 2;
+}
+
+// Defines the mapping of an RPC method to one or more HTTP REST endpoints.
+message HttpRule {
+  // Selects methods to which this rule applies. (Kept as string for compatibility.)
+  string selector = 1;
+
+  oneof pattern {
+    string get = 2;
+    string put = 3;
+    string post = 4;
+    string delete = 5;
+    string patch = 6;
+    CustomHttpPattern custom = 8;
+  }
+
+  // The name of the request field whose value is mapped to the HTTP request body, or "*" for mapping all fields.
+  string body = 7;
+
+  // Optional name of the response field whose value is used as the HTTP response body.
+  string response_body = 12;
+
+  // Additional HTTP bindings for the selector, with the same semantics as primary binding.
+  repeated HttpRule additional_bindings = 11;
+}
+
+// A custom pattern is used for defining custom verb.
+message CustomHttpPattern {
+  string kind = 1;
+  string path = 2;
+}

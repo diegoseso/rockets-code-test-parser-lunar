@@ -1,0 +1,6 @@
+services:
+  rockets:
+    build: .
+    ports:
+      - "8088:8088" # HTTP/REST (ingestion and query API)
+      - "8000:8000" # gRPC
